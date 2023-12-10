@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TableBooking.Models;
+﻿using TableBooking.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace TableBooking.Data
 {
-    public class ApplicationDbContext: DbContext
+    public class ApplicationDbContext : DbContext
     {
-        
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -26,7 +26,7 @@ namespace TableBooking.Data
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Table> Tables { get; set; }
+        public DbSet<TableBooking.Models.Table> Tables { get; set; }
         public DbSet<Booking> Bookings { get; set; }
     }
 }
