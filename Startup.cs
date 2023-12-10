@@ -3,6 +3,7 @@ using TableBooking.Interfaces;
 using TableBooking.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using TableBooking.Utilities;
 
 namespace TableBooking
 {
@@ -50,6 +51,8 @@ namespace TableBooking
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseExceptionHandlingMiddleware();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

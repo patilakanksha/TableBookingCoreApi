@@ -4,6 +4,7 @@ using TableBooking.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Collections;
+using TableBooking.ViewModels;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -56,8 +57,8 @@ namespace CoreFinalTestBackend.Controllers
         }
 
         // PUT api/<TableController>/5
-        [HttpPut("Edit/{id}")]
-        public IActionResult Put(Guid id, [FromBody] User userForUpdate)
+        [HttpPost("Update")]
+        public IActionResult Put([FromBody] User userForUpdate)
         {
             _genericRepository.Edit(userForUpdate);
             _genericRepository.SaveChanges();
@@ -65,10 +66,10 @@ namespace CoreFinalTestBackend.Controllers
         }
 
         // DELETE api/<TableController>/5
-        [HttpDelete("Delete{id}")]
-        public async Task<ActionResult> Delete(Guid id)
+        [HttpPost("Delete")]
+        public async Task<ActionResult> Delete(IdViewModel request)
         {
-            User userForDelete = await _genericRepository.GetByIdAsync(id);
+            User userForDelete = await _genericRepository.GetByIdAsync(request.Id);
             _genericRepository.Delete(userForDelete);
             _genericRepository.SaveChanges();
             return Ok();
