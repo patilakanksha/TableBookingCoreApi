@@ -5,6 +5,8 @@ using TableBooking.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using TableBooking.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +14,8 @@ namespace CoreFinalTestBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+    [Authorize(Roles = "Guest")]
     public class BookingController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

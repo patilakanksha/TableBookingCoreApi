@@ -13,6 +13,7 @@ namespace CoreFinalTestBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class TableController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

@@ -43,12 +43,23 @@ namespace TableBooking.Controllers
             var user = await _accountService.Authenticate(userLogin);
             if (user != null)
             {
+                var response = new TokenPayloadVM();
                 // Generate token and update refresh token information in the database
                 var token = _accountService.GenerateToken(user);
                 user.RefreshAccessToken = token.RefreshToken;
                 user.RefreshTokenExpiryDate = DateTime.Now.AddDays(1);
+
                 _context.SaveChanges();
-                return Ok(token);
+                
+                var loginUser = new LoginUserPayloadVM {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Role = user.Role,
+                };
+                response.Token = token;
+                response.User = loginUser;
+                return Ok(response);
             }
             return NotFound("user not found");
         }
