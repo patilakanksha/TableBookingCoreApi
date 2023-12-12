@@ -24,6 +24,12 @@ namespace TableBooking
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //Enable CORS 
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod()
+                 .AllowAnyHeader());
+            });
             services.AddDbContext<ApplicationDbContext>
                 (options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
 
@@ -89,22 +95,26 @@ namespace TableBooking
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
         {
-            // Configure the HTTP request pipeline.
+           // Check if the application is running in development environment
             if (environment.IsDevelopment())
             {
+                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CRUDAspNetCore5WebAPI v1"));
             }
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors("AllowOrigin");
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseExceptionHandlingMiddleware();
-
+            // Configure endpoints for handling requests
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

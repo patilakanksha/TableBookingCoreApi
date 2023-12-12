@@ -7,6 +7,7 @@ using System.Collections;
 using TableBooking.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Microsoft.AspNetCore.Cors;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,7 +15,7 @@ namespace CoreFinalTestBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    [EnableCors("AllowOrigin")]
     [Authorize(Roles = "Guest")]
     public class BookingController : ControllerBase
     {
@@ -29,6 +30,7 @@ namespace CoreFinalTestBackend.Controllers
             _genericRepository = genericRepository;
         }
         // GET: api/<BookingController>
+        [AllowAnonymous]
         [HttpGet("List")]
         public async Task<IEnumerable> GetAll()
         {
@@ -37,6 +39,7 @@ namespace CoreFinalTestBackend.Controllers
         }
 
         // GET api/<BookingController>/5
+        [AllowAnonymous]
         [HttpPost("BookingGetById")]
         public async Task<ActionResult<Booking>> Details([FromBody] IdViewModel request)
         {
@@ -45,6 +48,7 @@ namespace CoreFinalTestBackend.Controllers
 
         // POST api/<BookingController>
         [HttpPost]
+        [AllowAnonymous]
         public  async Task<IActionResult> Create([FromBody] Booking bookingData)
         {
             bookingData.Id = Guid.NewGuid();
@@ -61,6 +65,7 @@ namespace CoreFinalTestBackend.Controllers
         }
 
         // PUT api/<BookingController>/5
+        [AllowAnonymous]
         [HttpPost("Update")]
         public IActionResult Put([FromBody] Booking updatedBookingData)
         {
@@ -70,6 +75,7 @@ namespace CoreFinalTestBackend.Controllers
         }
 
         // DELETE api/<BookingController>/5
+        [AllowAnonymous]
         [HttpPost("Delete")]
         public async Task<ActionResult> Delete([FromBody] IdViewModel request)
         {

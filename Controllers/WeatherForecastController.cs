@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TableBooking.Controllers
 {
     [ApiController]
+    [EnableCors("AllowOrigin")]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {

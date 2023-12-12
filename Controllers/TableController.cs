@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Collections;
 using TableBooking.ViewModels;
+using Microsoft.AspNetCore.Cors;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CoreFinalTestBackend.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowOrigin")]
     [ApiController]
     [Authorize(Roles = "Admin")]
     public class TableController : ControllerBase
@@ -45,6 +47,7 @@ namespace CoreFinalTestBackend.Controllers
         }
 
         // POST api/<TableController>
+        [AllowAnonymous]
         [HttpPost("Add")]
         public async Task<ActionResult> Post([FromBody] TableBooking.Models.Table tableData)
         {
@@ -62,6 +65,7 @@ namespace CoreFinalTestBackend.Controllers
         }
 
         // PUT api/<TableController>/5
+        [AllowAnonymous]
         [HttpPost("Update")]
         public IActionResult Put([FromBody] TableBooking.Models.Table tableForUpdate)
         {
@@ -71,6 +75,7 @@ namespace CoreFinalTestBackend.Controllers
         }
 
         // DELETE api/<TableController>/5
+        [AllowAnonymous]
         [HttpPost("Delete")]
         public async Task<ActionResult> Delete([FromBody] IdViewModel request)
         {

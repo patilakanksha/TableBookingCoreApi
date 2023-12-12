@@ -7,12 +7,14 @@ using System.Collections;
 using TableBooking.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Microsoft.AspNetCore.Cors;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CoreFinalTestBackend.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowOrigin")]
     [ApiController]
 
     [Authorize(Roles = "Guest")]

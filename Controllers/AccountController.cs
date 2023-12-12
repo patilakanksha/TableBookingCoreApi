@@ -6,10 +6,12 @@ using TableBooking.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Cors;
 
 namespace TableBooking.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowOrigin")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -52,6 +54,7 @@ namespace TableBooking.Controllers
                 _context.SaveChanges();
                 
                 var loginUser = new LoginUserPayloadVM {
+                    Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
