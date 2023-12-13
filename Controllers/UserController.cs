@@ -17,7 +17,7 @@ namespace CoreFinalTestBackend.Controllers
     [EnableCors("AllowOrigin")]
     [ApiController]
 
-    [Authorize(Roles = "Guest")]
+    
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -38,10 +38,10 @@ namespace CoreFinalTestBackend.Controllers
         }
 
         // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> Get(Guid id)
+        [HttpPost("GetById")]
+        public async Task<ActionResult<User>> Get([FromBody] IdViewModel request)
         {
-            var userDetails = await _genericRepository.GetByIdAsync(id);
+            var userDetails = await _genericRepository.GetByIdAsync(request.Id);
             return userDetails;
         }
 

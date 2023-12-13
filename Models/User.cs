@@ -17,8 +17,8 @@ namespace TableBooking.Models
         public string Password { get; set; }
         public string Role { get; set; }
 
-        public string RefreshAccessToken { get; set; }
-        public DateTime RefreshTokenExpiryDate { get; set; }
+        public string? RefreshAccessToken { get; set; }
+        public DateTime? RefreshTokenExpiryDate { get; set; }
         [JsonIgnore]
         [NotMapped]
         public List<Booking>? Bookings { get; set; }
