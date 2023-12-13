@@ -54,7 +54,10 @@ namespace CoreFinalTestBackend.Controllers
             {
                 await _genericRepository.Create(userData);
                 await _genericRepository.SaveChanges();
-                return Ok();
+                return Ok(new
+                {
+                    Status = "User registered successfully",
+                });
             }
             return BadRequest(new
             {
